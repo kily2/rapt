@@ -3,6 +3,8 @@
 require 'gosu'
 require_relative 'levels'
 require_relative 'playerShip'
+require_relative 'enemyShip'
+
 
 class GameWindow < Gosu::Window
   def initialize
@@ -12,16 +14,19 @@ class GameWindow < Gosu::Window
 	#@levels = Levels.new(self)
 	#@current_level = @levels.get_level(0)	
   	@playerShip = PlayerShip.new(self)
+	@enemyShip = EnemyShip.new(self)
   end
 
   def update
 	#@current_level.update
   	@playerShip.update
+	@enemyShip.update
   end
 
   def draw
   	#@current_level.draw
 	@playerShip.draw
+	@enemyShip.draw
   end
   
   def needs_cursor?
@@ -30,6 +35,10 @@ class GameWindow < Gosu::Window
 
   def button_down(id)
 	@playerShip.button_down(id)
+  end
+
+  def button_up(id)
+	@playerShip.button_up(id)
   end
 end
 

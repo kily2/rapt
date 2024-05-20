@@ -11,22 +11,28 @@ class ShootBall
 		@radius = 2
 
 		@start=false
+		@last_update_time = Gosu.milliseconds
+    	@speed = 250
 	end
 
 
 	def draw
-		if @start && @y > -5
-			@y-=2	
-		elsif @start
-			@start=false
-			log("#{@y} : y, #{@start} : start")
-		end
-		draw_circle(@x,@y,@radius,Gosu::Color::WHITE)
+		draw_circle(@x,@y,@radius,Gosu::Color::WHITE) if @start
 	end
 
 
 	def update
+	   	current_time = Gosu.milliseconds
+    	elapsed_time = current_time - @last_update_time	
 
+		if @start && @y > -@radius
+			@y -= @speed * elapsed_time / 1000.0	
+		elsif @start
+			@start=false
+			log("#{@y} : y, #{@start} : start")
+		end
+
+		@last_update_time = current_time
 	end
 
 	def draw_circle(x, y, radius, color)
@@ -49,6 +55,7 @@ class ShootBall
 	def shoot(x,y)
 		@x,@y=x,y
 		@start=true
+		@last_update_time = Gosu.milliseconds
 	end	
 end
 
