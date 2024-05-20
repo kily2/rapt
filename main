@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'gosu'
+require_relative 'levels'
+require_relative 'playerShip'
+
+class GameWindow < Gosu::Window
+  def initialize
+    super 640, 480
+    self.caption = "RAPTOR v0.0.1"
+
+	#@levels = Levels.new(self)
+	#@current_level = @levels.get_level(0)	
+  	@playerShip = PlayerShip.new(self)
+  end
+
+  def update
+	#@current_level.update
+  	@playerShip.update
+  end
+
+  def draw
+  	#@current_level.draw
+	@playerShip.draw
+  end
+  
+  def needs_cursor?
+    false
+  end
+end
+
+
+
+
+
+
+
+window = GameWindow.new
+window.show
+
+###
+
+
