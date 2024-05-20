@@ -4,7 +4,7 @@ require_relative 'shootball'
 require_relative 'log'
 
 class PlayerShip
-
+attr_reader :balls
 	def initialize(window)
 		@window = window
 		

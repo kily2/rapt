@@ -4,7 +4,9 @@ require_relative 'playerShip'
 require_relative 'log'
 
 class ShootBall
-	
+attr_reader :x,:y
+attr_accessor :hit
+
 	def initialize(window)
 		@window = window
 		@x,@y = 0,0
@@ -13,12 +15,16 @@ class ShootBall
 		@start=false
 		@last_update_time = Gosu.milliseconds
     	@speed = 250
+
+		@hit = false
 	end
+
 
 
 	def draw
-		draw_circle(@x,@y,@radius,Gosu::Color::WHITE) if @start
+		draw_circle(@x,@y,@radius,Gosu::Color::WHITE) if @start && !@hit
 	end
+
 
 
 	def update
@@ -34,6 +40,8 @@ class ShootBall
 
 		@last_update_time = current_time
 	end
+
+
 
 	def draw_circle(x, y, radius, color)
 		segments = 32
@@ -52,9 +60,12 @@ class ShootBall
 		end
 	end
 
+
+
 	def shoot(x,y)
 		@x,@y=x,y
 		@start=true
+		@hit=false
 		@last_update_time = Gosu.milliseconds
 	end	
 end

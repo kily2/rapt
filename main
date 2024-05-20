@@ -21,6 +21,9 @@ class GameWindow < Gosu::Window
 	#@current_level.update
   	@playerShip.update
 	@enemyShip.update
+	@playerShip.balls.each do |ball|
+		ball.hit = @enemyShip.hit(ball.x,ball.y) if !ball.hit
+	end
   end
 
   def draw

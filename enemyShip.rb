@@ -1,6 +1,6 @@
 
 require 'gosu'
-
+require_relative 'log'
 
 class EnemyShip
 	def initialize(window)
@@ -10,7 +10,7 @@ class EnemyShip
 		@width = 50
 		@height = 30
 
-		@life = 50
+		@life = 100
 	end
 
 	def draw
@@ -29,9 +29,12 @@ class EnemyShip
 	end
 
 	def hit(x,y)
-		if x>=@x&&x<@x+@width&&y<@y+@height
+		if x>=@x&&x<@x+@width&&y<@y+@height&&@life>0
 			@life -= 5
+			log("life: #{@life}")
+			return true
 		end
+		false
 	end
 
 end
