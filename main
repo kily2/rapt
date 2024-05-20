@@ -27,6 +27,10 @@ class GameWindow < Gosu::Window
   def needs_cursor?
     false
   end
+
+  def button_down(id)
+	@playerShip.button_down(id)
+  end
 end
 
 

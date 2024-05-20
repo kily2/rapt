@@ -1,7 +1,7 @@
 
 require 'gosu'
 require_relative 'shootball'
-
+require_relative 'log'
 
 class PlayerShip
 
@@ -33,6 +33,8 @@ class PlayerShip
       		x-w/2, y+h, Gosu::Color::GREEN,
       		x+w/2, y+h, Gosu::Color::GREEN
     	)
+
+		@ball.draw
 	end
 
 
@@ -44,13 +46,17 @@ class PlayerShip
 		@y=@window.height-@height 	unless @y<@window.height
 	end
 
+	def shoot
+		@ball.shoot(@x,@y)
+	end
 
 	def button_down(id)
 		case id
 		when Gosu::MS_LEFT
-			@ball.shoot_ball(@x,@y)
+			log("Shoot")
+			shoot
 		when Gosu::MS_RIGHT
-			#shoot missle?
+			#change weapon
 		end
 	end
 end
